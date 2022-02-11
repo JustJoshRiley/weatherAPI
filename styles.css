@@ -11,19 +11,17 @@ body {
 	align-items: center;
 }
 
-h1, p {
-	margin: 0 0 1rem 0;
-}
 
 .container {
-	width: 100vw;
-	height: 50vh!important;
+	width: 85vw;
+	height: max-content;
 	height: max-content;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border: 1px
+	border: 1px solid black;
+	padding: 2.5%;
 }
 
 #forms {
@@ -32,18 +30,29 @@ h1, p {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
 
-#zipform, #cityform, #geoform {
+#form {
 	display: flex;
 	flex-direction: column;
 	height: max-content;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
+	border: 1px solid black;
+	padding: 2.5%;
 }
 
-#zipform > input, #cityform > input, #geoform > input {
+.unit {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+#form > label > input {
 	flex: 1;
 	padding: 1em;
 	font-size: 1em;
@@ -53,7 +62,7 @@ h1, p {
 	border-right: none;
 }
 
-#zipform > button, #cityform > button, #geoform > button {
+#form > button {
 	padding: 1em;
 	background-color: rgb(106, 177, 238);
 	color: #fff;

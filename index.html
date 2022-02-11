@@ -15,63 +15,60 @@
       <p id="cityResponse">
         <!--city-->
       </p>
-      <!-- zip -->
       <div id="forms">
-        <form id="zipform">
-          <h1>Search by Zip</h1>
-          <input 
-            id="zip" 
-            type="number" 
-            placeholder="zip code"
-            title="Please Enter a valid Zip Code"
-            pattern="^\d{5}(?:[-\s]\d{4})?$"
-          >
-          <label for="unit">Select a Unit</label>
-          <select name="unit" id="unit">
-            <option value="imperial">Imperial</option>
-            <option value="metric">Metric</option>
-          </select>
+        <h1>Search by City, Unit, or Geo Coordinates</h1>
+        <form id="form">
+          <!-- Zip -->
+          <label for="zip">
+            Zip
+            <input 
+              id="zip" 
+              type="number" 
+              placeholder="zip code"
+              title="Please Enter a valid Zip Code"
+              pattern="^\d{5}(?:[-\s]\d{4})?$"
+            >
+          </label>
+          <!-- city -->
+          <label for="city">
+            City
+            <input 
+              id="city" 
+              type="text" 
+              placeholder="San Francisco"
+              title="Please Enter a City"
+            >
+          </label>
+          <!-- geo -->
+          <label for="geo">
+            Geo
+            <input 
+              id="lat" 
+              type="text" 
+              placeholder="Latitude N"
+              title="Please Enter Latitude"
+            >
+            <input 
+              id="lon" 
+              type="text" 
+              placeholder="Longitude W"
+              title="Please Enter Longitude"
+            >
+          </label>
+          <div class="unit">
+            <label for="unit">Select a Unit</label>
+            <select name="unit" id="unit">
+              <option value="imperial">Imperial</option>
+              <option value="metric">Metric</option>
+            </select>
+          </div>
           <button type="submit">Search</button>
         </form>
         <!-- city -->
-        <form id="cityform">
-          <h1>Search by City</h1>
-          <input 
-            id="city" 
-            type="text" 
-            placeholder="San Francisco"
-            title="Please Enter a City"
-          >
-          <label for="unit">Select a Unit</label>
-          <select name="unit" id="unit">
-            <option value="imperial">Imperial</option>
-            <option value="metric">Metric</option>
-          </select>
-          <button type="submit">Search</button>
-        </form>
+        
 
         <!-- Geo -->
-        <form id="geoform">
-          <h1>Search by City</h1>
-          <input 
-            id="lat" 
-            type="text" 
-            placeholder="Latitude N"
-            title="Please Enter Latitude"
-          >
-          <input 
-            id="lon" 
-            type="text" 
-            placeholder="Longitude W"
-            title="Please Enter Longitude"
-          >
-          <label for="unit">Select a Unit</label>
-          <select name="unit" id="unit">
-            <option value="imperial">Imperial</option>
-            <option value="metric">Metric</option>
-          </select>
-          <button type="submit">Search</button>
-        </form>
+        
 
       </div>
     </div>
@@ -79,73 +76,61 @@
       // ------------------------------------------------------
       // Developer Code
       // Get Element refererences
-      import { getWeatherbyZip, getWeatherbyCity, getWeatherbyGeo} from './index.js'
-      // zip
-      const zipformEl = document.getElementById('zipform')
+      // import { getWeatherbyZip, getWeatherbyCity, getWeatherbyGeo} from './index.js'
+      import {WeatherLib} from './index.js'
+      // form
+      const formEl = document.getElementById('form')
       const zipInput = document.getElementById('zip')
 
       // city
-      const cityformEl = document.getElementById('cityform')
       const cityInput = document.getElementById('city')
 
       // geo
-      const geoformEl = document.getElementById('geoform')
       const geoLatInput = document.getElementById('lat')
       const geoLonInput = document.getElementById('lon')
 
-
+      // Create weather object
       const apiKey = '1a226c5722a5a37173253cabe929e4d3'
+      const weather = new WeatherLib(apiKey)
+
       const tempEl = document.getElementById('temp')
       const descEl = document.getElementById('desc')
       const cityEl = document.getElementById('cityResponse')
       
+      // Functions 
 
-
-      // Define event listeners
       // zip
-      zipformEl.addEventListener('submit', (e) => {
+      // Define event listeners
+      formEl.addEventListener('submit', (e) => {
         e.preventDefault()
         const zip = zipInput.value
-        const select = document.getElementById('unit');
-        const unit = select.options[select.selectedIndex].value;
-        getWeatherbyZip(apiKey, zip, unit, (data) => {
-          tempEl.innerHTML = data.mainTemp
-          descEl.innerHTML = data.weather
-          cityEl.innerHTML = data.cityName
-        })
-      })
 
-      // city
-      cityformEl.addEventListener('submit', (e) => {
-        e.preventDefault()
         const city = cityInput.value
-        console.log(city)
-        const select = document.getElementById('unit');
-        const unit = select.options[select.selectedIndex].value;
-        getWeatherbyCity(apiKey, city, unit, (data) => {
-          tempEl.innerHTML = data.mainTemp
-          descEl.innerHTML = data.weather
-          cityEl.innerHTML = data.cityName
-        })
-      })
 
-      // geo
-      geoformEl.addEventListener('submit', (e) => {
-        e.preventDefault()
         const lat = geoLatInput.value
         const lon = geoLonInput.value
+
         const select = document.getElementById('unit');
         const unit = select.options[select.selectedIndex].value;
-        getWeatherbyGeo(apiKey, lat, lon, unit, (data) => {
+        
+        weather.getWeatherByZip(zip, unit, (data) => {
+          tempEl.innerHTML = data.mainTemp
+          descEl.innerHTML = data.weather
+          cityEl.innerHTML = data.cityName
+        })
+
+        weather.getWeatherByCity(city, unit, (data) => {
+          tempEl.innerHTML = data.mainTemp
+          descEl.innerHTML = data.weather
+          cityEl.innerHTML = data.cityName
+        })
+
+        weather.getWeatherByCity(lat, lon, unit, (data) => {
           tempEl.innerHTML = data.mainTemp
           descEl.innerHTML = data.weather
           cityEl.innerHTML = data.cityName
         })
       })
-
-
-      // Functions 
-    
     </script>
   </body>
 </html>
