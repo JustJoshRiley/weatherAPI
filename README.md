@@ -14,7 +14,7 @@ Run - git clone https://github.com/JustJoshRiley/weatherAPI.git
 3. Lines 92 - 94:
   * Saves an API_KEY to a variable (apiKey).
   * Creates a new weather class
-    * Passes the apiKey to the class
+    * Passes the apiKey to the class (this can be done directly)
 
 4. In the event listener we access methods of the weather class:
   * Line 116 gets the weather by zip from the user

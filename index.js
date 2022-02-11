@@ -3,6 +3,7 @@ export class WeatherLib {
         this._apiKey = apiKey
     }
 
+    
     async getWeatherByZip(zip, unit, callback) {
         const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${this._apiKey}&units=${unit}`
         const res = await  fetch(path)
