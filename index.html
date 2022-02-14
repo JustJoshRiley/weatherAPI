@@ -22,7 +22,7 @@
           <label for="zip">
             Zip
             <input 
-              id="zip" 
+              id="zip"
               type="number" 
               placeholder="zip code"
               title="Please Enter a valid Zip Code"
@@ -130,6 +130,12 @@
           descEl.innerHTML = data.weather
           cityEl.innerHTML = data.cityName
         })
+
+        // weather.persistGetWeatherByZip(zip, unit,  (data) => {
+        //   tempEl.innerHTML = data.mainTemp
+        //   descEl.innerHTML = data.weather
+        //   cityEl.innerHTML = data.cityName
+        // }, 10000)
       })
     </script>
   </body>

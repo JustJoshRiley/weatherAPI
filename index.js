@@ -2,7 +2,6 @@ export class WeatherLib {
     constructor(apiKey) {
         this._apiKey = apiKey
     }
-
     
     async getWeatherByZip(zip, unit, callback) {
         const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${this._apiKey}&units=${unit}`
@@ -41,4 +40,14 @@ export class WeatherLib {
         }
         callback(object)
     }
+
+    // persistGetWeatherByZip(zip, unit, callback, time) {
+    //     this.persistInterval = setInterval(() => {
+    //         this.getWeatherByZip(zip, unit, callback)
+    //     }, time)
+    // }
+
+    // stopIntervals() {
+    //     clearInterval(this.persistInterval)
+    // }
 }
