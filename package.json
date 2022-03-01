@@ -1,0 +1,19 @@
+{
+  "main": "umd/your-module-name-here.js",
+  "scripts": {
+    "prepare": "rollup --config",
+    "test": "jest"
+  },
+  "module": "esm/index.js",
+  "files": [
+    "esm/*",
+    "umd/*"
+  ],
+  "devDependencies": {
+    "rollup": "^2.68.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "jest": "^27.5.1"
+  }
+}

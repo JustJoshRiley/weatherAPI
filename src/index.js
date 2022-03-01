@@ -1,4 +1,4 @@
-export class WeatherLib {
+export default class WeatherLib {
     constructor(apiKey) {
         this._apiKey = apiKey
     }
